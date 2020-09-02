@@ -3,10 +3,10 @@
 //     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-
 namespace AuctionLogic.Repositories
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using Business;
@@ -36,19 +36,14 @@ namespace AuctionLogic.Repositories
 
         /// <summary>Adds the user.</summary>
         /// <param name="user">The user.</param>
-        /// <returns>Return the state of test.</returns>
-        public bool AddUser(User user)
+        public void AddUser(User user)
         {
             Log.Info("AddUser was called.");
 
-            if (userService.TestUser(user))
-            {
-                auction.Users.Add(user);
-                auction.SaveChanges();
-                return true;
-            }
+            userService.TestUser(user);
 
-            return false;
+            auction.Users.Add(user);
+            auction.SaveChanges();
         }
 
         /// <summary>Logs the out.</summary>
@@ -58,12 +53,11 @@ namespace AuctionLogic.Repositories
             Log.Info("LogOut was called.");
 
             var user = auction.Users
-                .Where(x => x.Active)
-                .SingleOrDefault();
+                .SingleOrDefault(x => x.Active);
 
             if (user == null)
             {
-                throw new UserIsLoggedOutException("Utilizatorul nu este conectat.");
+                throw new UserIsLoggedOutException("The user is not logged in.");
             }
 
             user.Active = false;
@@ -77,38 +71,45 @@ namespace AuctionLogic.Repositories
         {
             Log.Info("GetActiveUser was called.");
 
-            return auction.Users
-                 .Where(x => x.Active).SingleOrDefault();
+            return auction.Users.SingleOrDefault(x => x.Active);
         }
 
         /// <summary>Changes the user score.</summary>
-        /// <param name="idUser">The i d user.</param>
+        /// <param name="idUser">The identifier user.</param>
         /// <exception cref="InvalidProductException">There are no finished products.</exception>
+        /// <exception cref="InvalidUserException">User does not exist.</exception>
         public void ChangeUserScore(int idUser)
         {
             Log.Info("ChangeUserScore was called.");
 
-            var scoreList = auction.Products
+            List<double> scoreList = auction.Products
                 .Where(x => x.Score != null)
-                .Select(x => x.Score)
+                .Select(x => x.Score.Value)
                 .ToList();
 
             if (scoreList.Count == 0)
             {
-                Log.Error("Nu sunt produse finalizate");
-                throw new InvalidProductException("Nu sunt produse finalizate");
+                Log.Error("There are no finished products.");
+                throw new InvalidProductException("There are no finished products.");
             }
 
             var user = auction.Users
-                .Where(x => x.ID == idUser)
-                .SingleOrDefault();
+                .SingleOrDefault(x => x.ID == idUser);
 
-            int number = 0;
+            if (user == null)
+            {
+                throw new InvalidUserException("User does not exist.");
+            }
+
+            var number = 0;
+
             double sum = 0;
+
             int index;
+
             for (index = scoreList.Count - 1; index >= 0 && number < ApplicationHelp.LastNScores; index--)
             {
-                sum += (double)scoreList[index];
+                sum += scoreList[index];
                 number++;
             }
 

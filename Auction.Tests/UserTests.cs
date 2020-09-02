@@ -40,9 +40,9 @@ namespace Auction.Tests
             auctionMock.Roles.Add(new Role { ID = 2, RoleName = "Provider" });
         }
 
-        /// <summary>Adds the user valid user return true.</summary>
+        /// <summary>Adds the user valid user insert user.</summary>
         [TestMethod]
-        public void AddUser_ValidUser_ReturnTrue()
+        public void AddUser_ValidUser_InsertUser()
         {
             var user = new User
             {
@@ -63,102 +63,172 @@ namespace Auction.Tests
             Assert.IsTrue(auctionMock.Users.Count() == 1);
         }
 
-        /// <summary>Adds the user when user is null return false.</summary>
+        /// <summary>Adds the user when user is null expected exception.</summary>
         [TestMethod]
-        public void AddUser_WhenUserIsNull_ReturnFalse()
+        public void AddUser_WhenUserIsNull_ExpectedException()
         {
-            userRepositoryMock.AddUser(null);
+            try
+            {
+                userRepositoryMock.AddUser(null);
 
-            Assert.IsTrue(!auctionMock.Users.Any());
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user can not be null.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have null first name return false.</summary>
+        /// <summary>Adds the user user have null first name expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveNullFirstName_ReturnFalse()
+        public void AddUser_UserHaveNullFirstName_ExpectedException()
         {
             var user = new User
             {
                 FirstName = null,
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user first name can not be null.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have empty first name return false.</summary>
+        /// <summary>Adds the user user have empty first name expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveEmptyFirstName_ReturnFalse()
+        public void AddUser_UserHaveEmptyFirstName_ExpectedException()
         {
             var user = new User
             {
                 FirstName = string.Empty,
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user first name can not be empty.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have smaller first name return false.</summary>
+        /// <summary>Adds the user user have smaller first name expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveSmallerFirstName_ReturnFalse()
+        public void AddUser_UserHaveSmallerFirstName_ExpectedException()
         {
             var user = new User
             {
                 FirstName = "Ss",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user first name have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have longer first name return false.</summary>
+        /// <summary>Adds the user user have longer first name expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveLongerFirstName_ReturnFalse()
+        public void AddUser_UserHaveLongerFirstName_ExpectedException()
         {
             var user = new User
             {
                 FirstName = "Ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user first name have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have lower first name return false.</summary>
+        /// <summary>Adds the user user have lower first name expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveLowerFirstName_ReturnFalse()
+        public void AddUser_UserHaveLowerFirstName_ExpectedException()
         {
             var user = new User
             {
                 FirstName = "silvia",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user first name can not start with lower character.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have digit first name return false.</summary>
+        /// <summary>Adds the user user have digit first name expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveDigitFirstName_ReturnFalse()
+        public void AddUser_UserHaveDigitFirstName_ExpectedException()
         {
             var user = new User
             {
                 FirstName = "Silvia1",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user first name can not contain signs or digits.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have symbol first name return false.</summary>
+        /// <summary>Adds the user user have symbol first name expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveSymbolFirstName_ReturnFalse()
+        public void AddUser_UserHaveSymbolFirstName_ExpectedException()
         {
             var user = new User
             {
                 FirstName = "Silvia@&^",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user first name can not contain signs or digits.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have null last name return false.</summary>
+        /// <summary>Adds the user user have null last name expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveNullLastName_ReturnFalse()
+        public void AddUser_UserHaveNullLastName_ExpectedException()
         {
             var user = new User
             {
@@ -166,12 +236,21 @@ namespace Auction.Tests
                 LastName = null,
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user last name can not be null.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have empty last name return false.</summary>
+        /// <summary>Adds the user user have empty last name expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveEmptyLastName_ReturnFalse()
+        public void AddUser_UserHaveEmptyLastName_ExpectedException()
         {
             var user = new User
             {
@@ -179,12 +258,21 @@ namespace Auction.Tests
                 LastName = string.Empty,
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user first last can not be empty.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have smaller last name return false.</summary>
+        /// <summary>Adds the user user have smaller last name expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveSmallerLastName_ReturnFalse()
+        public void AddUser_UserHaveSmallerLastName_ExpectedException()
         {
             var user = new User
             {
@@ -192,12 +280,21 @@ namespace Auction.Tests
                 LastName = "Br",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user last name have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have longer last name return false.</summary>
+        /// <summary>Adds the user user have longer last name expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveLongerLastName_ReturnFalse()
+        public void AddUser_UserHaveLongerLastName_ExpectedException()
         {
             var user = new User
             {
@@ -205,12 +302,21 @@ namespace Auction.Tests
                 LastName = "Brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrassoi",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user last name have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have lower last name return false.</summary>
+        /// <summary>Adds the user user have lower last name expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveLowerLastName_ReturnFalse()
+        public void AddUser_UserHaveLowerLastName_ExpectedException()
         {
             var user = new User
             {
@@ -218,12 +324,21 @@ namespace Auction.Tests
                 LastName = "brassoi",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user last name can not start with lower character.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have digit last name return false.</summary>
+        /// <summary>Adds the user user have digit last name expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveDigitLastName_ReturnFalse()
+        public void AddUser_UserHaveDigitLastName_ExpectedException()
         {
             var user = new User
             {
@@ -231,12 +346,21 @@ namespace Auction.Tests
                 LastName = "Brassoi1",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user last name can not contain signs or digits.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have symbol last name return false.</summary>
+        /// <summary>Adds the user user have symbol last name expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveSymbolLastName_ReturnFalse()
+        public void AddUser_UserHaveSymbolLastName_ExpectedException()
         {
             var user = new User
             {
@@ -244,12 +368,21 @@ namespace Auction.Tests
                 LastName = "Brassoi@&^",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user last name can not contain signs or digits.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have smaller age return false.</summary>
+        /// <summary>Adds the user user have smaller age expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveSmallerAge_ReturnFalse()
+        public void AddUser_UserHaveSmallerAge_ExpectedException()
         {
             var user = new User
             {
@@ -258,12 +391,21 @@ namespace Auction.Tests
                 Age = 17,
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user have invalid age.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have higher age return false.</summary>
+        /// <summary>Adds the user user have higher age expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveHigherAge_ReturnFalse()
+        public void AddUser_UserHaveHigherAge_ExpectedException()
         {
             var user = new User
             {
@@ -272,12 +414,21 @@ namespace Auction.Tests
                 Age = 127,
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user have invalid age.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have smaller email return false.</summary>
+        /// <summary>Adds the user user have smaller email expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveSmallerEmail_ReturnFalse()
+        public void AddUser_UserHaveSmallerEmail_ExpectedException()
         {
             var user = new User
             {
@@ -287,27 +438,46 @@ namespace Auction.Tests
                 Email = "si",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user email is invalid.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have longer email return false.</summary>
+        /// <summary>Adds the user user have longer email expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveLongerEmail_ReturnFalse()
+        public void AddUser_UserHaveLongerEmail_ExpectedException()
         {
             var user = new User
             {
                 FirstName = "Silvia",
                 LastName = "Brassoi",
                 Age = 23,
+                // ReSharper disable once StringLiteralTypo
                 Email = "sidsasdasdasdasdasdasdasdasdasdasdasdasdasddddddddddddddddddddddddddssssssssssssssssssssssssssssss",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user email is invalid.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have invalid email return false.</summary>
+        /// <summary>Adds the user user have invalid email expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveInvalidEmail_ReturnFalse()
+        public void AddUser_UserHaveInvalidEmail_ExpectedException()
         {
             var user = new User
             {
@@ -317,42 +487,72 @@ namespace Auction.Tests
                 Email = "silvia.brassoi",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user email is invalid.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have null role status return false.</summary>
+        /// <summary>Adds the user user have null role status expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveNullRoleStatus_ReturnFalse()
+        public void AddUser_UserHaveNullRoleStatus_ExpectedException()
         {
             var user = new User
             {
                 FirstName = "Silvia",
                 LastName = "Brassoi",
-                Age = 127,
+                Age = 23,
                 Email = "Silvia.Brassoi@yahoo.com",
+                Password = "Silvia"
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user role can not be null.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have wrong role status return false.</summary>
+        /// <summary>Adds the user user have wrong role status expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveWrongRoleStatus_ReturnFalse()
+        public void AddUser_UserHaveWrongRoleStatus_ExpectedException()
         {
             var user = new User
             {
                 FirstName = "Silvia",
                 LastName = "Brassoi",
-                Age = 127,
+                Age = 23,
                 Email = "Silvia.Brassoi@yahoo.com",
                 Password = "Silvia",
+                RoleStatus = 3,
             };
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user have invalid role.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have null password return false.</summary>
+        /// <summary>Adds the user user have null password expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveNullPassword_ReturnFalse()
+        public void AddUser_UserHaveNullPassword_ExpectedException()
         {
             var user = new User
             {
@@ -362,12 +562,21 @@ namespace Auction.Tests
                 Email = "Silvia.Brassoi@yahoo.com",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user password can not be null.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have empty password return false.</summary>
+        /// <summary>Adds the user user have empty password expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveEmptyPassword_ReturnFalse()
+        public void AddUser_UserHaveEmptyPassword_ExpectedException()
         {
             var user = new User
             {
@@ -378,12 +587,21 @@ namespace Auction.Tests
                 Password = string.Empty,
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user password can not be empty.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have smaller password return false.</summary>
+        /// <summary>Adds the user user have smaller password expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveSmallerPassword_ReturnFalse()
+        public void AddUser_UserHaveSmallerPassword_ExpectedException()
         {
             var user = new User
             {
@@ -394,12 +612,21 @@ namespace Auction.Tests
                 Password = "p",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user password have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have longer password return false.</summary>
+        /// <summary>Adds the user user have longer password expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveLongerPassword_ReturnFalse()
+        public void AddUser_UserHaveLongerPassword_ExpectedException()
         {
             var user = new User
             {
@@ -407,15 +634,25 @@ namespace Auction.Tests
                 LastName = "Brassoi",
                 Age = 23,
                 Email = "Silvia.Brassoi@yahoo.com",
+                // ReSharper disable once StringLiteralTypo
                 Password = "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user password have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have lower password return false.</summary>
+        /// <summary>Adds the user user have lower password expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveLowerPassword_ReturnFalse()
+        public void AddUser_UserHaveLowerPassword_ExpectedException()
         {
             var user = new User
             {
@@ -426,12 +663,21 @@ namespace Auction.Tests
                 Password = "silvia",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user password can not start with lower character.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have null gender return false.</summary>
+        /// <summary>Adds the user user have null gender expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveNullGender_ReturnFalse()
+        public void AddUser_UserHaveNullGender_ExpectedException()
         {
             var user = new User
             {
@@ -443,12 +689,21 @@ namespace Auction.Tests
                 RoleStatus = 1,
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user gender can not be null.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have empty gender return false.</summary>
+        /// <summary>Adds the user user have empty gender expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveEmptyGender_ReturnFalse()
+        public void AddUser_UserHaveEmptyGender_ExpectedException()
         {
             var user = new User
             {
@@ -461,12 +716,21 @@ namespace Auction.Tests
                 Gender = string.Empty,
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user gender can not be empty.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have smaller gender return false.</summary>
+        /// <summary>Adds the user user have smaller gender expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveSmallerGender_ReturnFalse()
+        public void AddUser_UserHaveSmallerGender_ExpectedException()
         {
             var user = new User
             {
@@ -479,12 +743,21 @@ namespace Auction.Tests
                 Gender = string.Empty,
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user gender can not be empty.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have longer first name return false.</summary>
+        /// <summary>Adds the user user have longer first name expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveLongerGender_ReturnFalse()
+        public void AddUser_UserHaveLongerGender_ExpectedException()
         {
             var user = new User
             {
@@ -497,12 +770,21 @@ namespace Auction.Tests
                 Gender = "MM",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user gender have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have lower gender return false.</summary>
+        /// <summary>Adds the user user have lower gender expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveLowerGender_ReturnFalse()
+        public void AddUser_UserHaveLowerGender_ExpectedException()
         {
             var user = new User
             {
@@ -515,12 +797,21 @@ namespace Auction.Tests
                 Gender = "m",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user gender can not start with lower character.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have digit gender return false.</summary>
+        /// <summary>Adds the user user have digit gender expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveDigitGender_ReturnFalse()
+        public void AddUser_UserHaveDigitGender_ExpectedException()
         {
             var user = new User
             {
@@ -530,15 +821,24 @@ namespace Auction.Tests
                 Email = "Silvia.Brassoi@yahoo.com",
                 Password = "Silvia",
                 RoleStatus = 1,
-                Gender = "M1",
+                Gender = "1",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user have invalid gender.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have symbol gender return false.</summary>
+        /// <summary>Adds the user user have symbol gender expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveSymbolGender_ReturnFalse()
+        public void AddUser_UserHaveSymbolGender_ExpectedException()
         {
             var user = new User
             {
@@ -548,15 +848,24 @@ namespace Auction.Tests
                 Email = "Silvia.Brassoi@yahoo.com",
                 Password = "Silvia",
                 RoleStatus = 1,
-                Gender = "M$",
+                Gender = "$",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user have invalid gender.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have null CNP return false.</summary>
+        /// <summary>Adds the user user have null CNP expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveNullCNP_ReturnFalse()
+        public void AddUser_UserHaveNullCNP_ExpectedException()
         {
             var user = new User
             {
@@ -569,12 +878,21 @@ namespace Auction.Tests
                 Gender = "M",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user cnp can not be null.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have empty CNP return false.</summary>
+        /// <summary>Adds the user user have empty CNP expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveEmptyCNP_ReturnFalse()
+        public void AddUser_UserHaveEmptyCNP_ExpectedException()
         {
             var user = new User
             {
@@ -588,12 +906,21 @@ namespace Auction.Tests
                 CNP = string.Empty,
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user cnp have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have smaller CNP return false.</summary>
+        /// <summary>Adds the user user have smaller CNP expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveSmallerCNP_ReturnFalse()
+        public void AddUser_UserHaveSmallerCNP_ExpectedException()
         {
             var user = new User
             {
@@ -607,12 +934,21 @@ namespace Auction.Tests
                 CNP = "123",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user cnp have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have longer CNP return false.</summary>
+        /// <summary>Adds the user user have longer CNP expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveLongerCNP_ReturnFalse()
+        public void AddUser_UserHaveLongerCNP_ExpectedException()
         {
             var user = new User
             {
@@ -626,12 +962,21 @@ namespace Auction.Tests
                 CNP = "123123123123123123",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user cnp have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have not digit CNP return false.</summary>
+        /// <summary>Adds the user user have not digit CNP expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveNotDigitCNP_ReturnFalse()
+        public void AddUser_UserHaveNotDigitCNP_ExpectedException()
         {
             var user = new User
             {
@@ -642,15 +987,25 @@ namespace Auction.Tests
                 Password = "Silvia",
                 RoleStatus = 1,
                 Gender = "M",
+                // ReSharper disable once StringLiteralTypo
                 CNP = "abecedardaswd",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user have invalid cnp.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have digit and chars gender return false.</summary>
+        /// <summary>Adds the user user have digit and chars gender expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveDigitAndCharsGender_ReturnFalse()
+        public void AddUser_UserHaveDigitAndCharsGender_ExpectedException()
         {
             var user = new User
             {
@@ -664,12 +1019,21 @@ namespace Auction.Tests
                 CNP = "199060208232d",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user have invalid cnp.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have symbol CNP return false.</summary>
+        /// <summary>Adds the user user have symbol CNP expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveSymbolCNP_ReturnFalse()
+        public void AddUser_UserHaveSymbolCNP_ExpectedException()
         {
             var user = new User
             {
@@ -683,12 +1047,21 @@ namespace Auction.Tests
                 CNP = "199060208232%",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user have invalid cnp.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have male gender and wrong CNP return false.</summary>
+        /// <summary>Adds the user user have male gender and wrong CNP expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveMaleGenderAndWrongCNP_ReturnFalse()
+        public void AddUser_UserHaveMaleGenderAndWrongCNP_ExpectedException()
         {
             var user = new User
             {
@@ -702,12 +1075,21 @@ namespace Auction.Tests
                 CNP = "2990602082231",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user have invalid cnp.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have female gender and wrong CNP return false.</summary>
+        /// <summary>Adds the user user have female gender and wrong CNP expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveFemaleGenderAndWrongCNP_ReturnFalse()
+        public void AddUser_UserHaveFemaleGenderAndWrongCNP_ExpectedException()
         {
             var user = new User
             {
@@ -721,12 +1103,21 @@ namespace Auction.Tests
                 CNP = "1990602082323",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user have invalid cnp.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have null address return false.</summary>
+        /// <summary>Adds the user user have null address expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveNullAddress_ReturnFalse()
+        public void AddUser_UserHaveNullAddress_ExpectedException()
         {
             var user = new User
             {
@@ -740,12 +1131,21 @@ namespace Auction.Tests
                 CNP = "1990602082223",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user address can not be null.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have empty address return false.</summary>
+        /// <summary>Adds the user user have empty address expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveEmptyAddress_ReturnFalse()
+        public void AddUser_UserHaveEmptyAddress_ExpectedException()
         {
             var user = new User
             {
@@ -760,12 +1160,21 @@ namespace Auction.Tests
                 Adress = string.Empty,
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user address can not be empty.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have smaller address return false.</summary>
+        /// <summary>Adds the user user have smaller address expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveSmallerAddress_ReturnFalse()
+        public void AddUser_UserHaveSmallerAddress_ExpectedException()
         {
             var user = new User
             {
@@ -780,12 +1189,21 @@ namespace Auction.Tests
                 Adress = "ab",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user address have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have longer address return false.</summary>
+        /// <summary>Adds the user user have longer address expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveLongerAddress_ReturnFalse()
+        public void AddUser_UserHaveLongerAddress_ExpectedException()
         {
             var user = new User
             {
@@ -797,15 +1215,25 @@ namespace Auction.Tests
                 RoleStatus = 1,
                 Gender = "M",
                 CNP = "1990602082223",
+                // ReSharper disable once StringLiteralTypo
                 Adress = "abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user address have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have lower address return false.</summary>
+        /// <summary>Adds the user user have lower address expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveLowerAddress_ReturnFalse()
+        public void AddUser_UserHaveLowerAddress_ExpectedException()
         {
             var user = new User
             {
@@ -820,12 +1248,21 @@ namespace Auction.Tests
                 Adress = "mandra nr 61",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user address can not start with lower character.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have symbol address return false.</summary>
+        /// <summary>Adds the user user have symbol address expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveSymbolAddress_ReturnFalse()
+        public void AddUser_UserHaveSymbolAddress_ExpectedException()
         {
             var user = new User
             {
@@ -840,12 +1277,21 @@ namespace Auction.Tests
                 Adress = "Mandra nr. 61 @2",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user have invalid address.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have null phone return false.</summary>
+        /// <summary>Adds the user user have null phone expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveNullPhone_ReturnFalse()
+        public void AddUser_UserHaveNullPhone_ExpectedException()
         {
             var user = new User
             {
@@ -860,12 +1306,21 @@ namespace Auction.Tests
                 Adress = "Mandra nr. 61",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user phone can not be null.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have empty phone return false.</summary>
+        /// <summary>Adds the user user have empty phone expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveEmptyPhone_ReturnFalse()
+        public void AddUser_UserHaveEmptyPhone_ExpectedException()
         {
             var user = new User
             {
@@ -881,12 +1336,21 @@ namespace Auction.Tests
                 Phone = string.Empty,
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user phone have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have smaller phone return false.</summary>
+        /// <summary>Adds the user user have smaller phone expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveSmallerPhone_ReturnFalse()
+        public void AddUser_UserHaveSmallerPhone_ExpectedException()
         {
             var user = new User
             {
@@ -902,12 +1366,21 @@ namespace Auction.Tests
                 Phone = "0731",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user phone have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have longer phone return false.</summary>
+        /// <summary>Adds the user user have longer phone expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveLongerPhone_ReturnFalse()
+        public void AddUser_UserHaveLongerPhone_ExpectedException()
         {
             var user = new User
             {
@@ -923,12 +1396,21 @@ namespace Auction.Tests
                 Phone = "0731231231231231",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user phone have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have not digit phone return false.</summary>
+        /// <summary>Adds the user user have not digit phone expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveNotDigitPhone_ReturnFalse()
+        public void AddUser_UserHaveNotDigitPhone_ExpectedException()
         {
             var user = new User
             {
@@ -941,15 +1423,25 @@ namespace Auction.Tests
                 Gender = "M",
                 CNP = "1990602082223",
                 Adress = "Mandra nr. 61",
+                // ReSharper disable once StringLiteralTypo
                 Phone = "abscdefert",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user have invalid phone.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have digit and chars phone return false.</summary>
+        /// <summary>Adds the user user have digit and chars phone expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveDigitAndCharsPhone_ReturnFalse()
+        public void AddUser_UserHaveDigitAndCharsPhone_ExpectedException()
         {
             var user = new User
             {
@@ -965,12 +1457,21 @@ namespace Auction.Tests
                 Phone = "074123adsd",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user have invalid phone.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the user user have symbol phone return false.</summary>
+        /// <summary>Adds the user user have symbol phone expected exception.</summary>
         [TestMethod]
-        public void AddUser_UserHaveSymbolPhone_ReturnFalse()
+        public void AddUser_UserHaveSymbolPhone_ExpectedException()
         {
             var user = new User
             {
@@ -986,7 +1487,16 @@ namespace Auction.Tests
                 Phone = "076195631@",
             };
 
-            Assert.IsFalse(userRepositoryMock.AddUser(user));
+            try
+            {
+                userRepositoryMock.AddUser(user);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestUser - user have invalid phone.", ex.Message);
+            }
         }
 
         /// <summary>Logs the out user is logged in set user active to false.</summary>
@@ -1016,7 +1526,7 @@ namespace Auction.Tests
             var currentUser = auctionMock.Users
                 .FirstOrDefault(x => x.Email == "Silvia.Brassoi@yahoo.com");
 
-            Assert.IsTrue(currentUser.Active);
+            Assert.IsTrue(currentUser != null && currentUser.Active);
 
             userRepositoryMock.LogOut();
 
@@ -1141,6 +1651,8 @@ namespace Auction.Tests
 
             var user = auctionMock.Users
                 .SingleOrDefault(x => x.ID == 1);
+
+            Assert.IsTrue(user != null);
 
             Assert.IsTrue(user.BannedTime == null);
 

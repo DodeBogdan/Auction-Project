@@ -3,13 +3,11 @@
 //     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-
-using AuctionLogic.Exceptions;
-
 namespace AuctionLogic.Business
 {
     using System.Linq;
     using System.Reflection;
+    using AuctionLogic.Exceptions;
     using log4net;
     using Models;
 
@@ -26,7 +24,7 @@ namespace AuctionLogic.Business
         /// or
         /// TestCategory - category name can not be null.
         /// or
-        /// TestCategory - category name can not pe empty.
+        /// TestCategory - category name can not be empty.
         /// or
         /// TestCategory - category name have invalid length.
         /// or
@@ -50,7 +48,7 @@ namespace AuctionLogic.Business
 
             if (category.Name.Length == 0)
             {
-                throw new InvalidCategoryException("TestCategory - category name can not pe empty.");
+                throw new InvalidCategoryException("TestCategory - category name can not be empty.");
             }
 
             if ((category.Name.Length < 3) || (category.Name.Length > 50))

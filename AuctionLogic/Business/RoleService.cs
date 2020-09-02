@@ -7,6 +7,7 @@ namespace AuctionLogic.Business
 {
     using System.Linq;
     using System.Reflection;
+    using Exceptions;
     using log4net;
     using Models;
 
@@ -18,38 +19,54 @@ namespace AuctionLogic.Business
         /// <summary>The log</summary>
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        /// <summary>
-        ///   <para>
-        ///  Tests the role.
-        /// </para>
-        /// </summary>
+        /// <summary>Tests the role.</summary>
         /// <param name="role">The role.</param>
-        /// <returns>Return true if role is valid, false if not.</returns>
-        public bool TestRole(Role role)
+        /// <exception cref="InvalidRoleException">
+        /// TestRole - role can not be null.
+        /// or
+        /// TestRole - role name can not be null.
+        /// or
+        /// TestRole - role name can not be empty.
+        /// or
+        /// TestRole - role name have invalid length.
+        /// or
+        /// TestRole - role name can not contain signs or digits.
+        /// or
+        /// TestRole - role name can not start with lower character.
+        /// </exception>
+        public void TestRole(Role role)
         {
             Log.Info("TestRole() was called.");
 
-            if (role?.RoleName == null)
+            if (role == null)
             {
-                return false;
+                throw new InvalidRoleException("TestRole - role can not be null.");
+            }
+
+            if (role.RoleName == null)
+            {
+                throw new InvalidRoleException("TestRole - role name can not be null.");
             }
 
             if (role.RoleName.Length == 0)
             {
-                return false;
+                throw new InvalidRoleException("TestRole - role name can not be empty.");
             }
 
             if ((role.RoleName.Length < 3) || (role.RoleName.Length > 50))
             {
-                return false;
+                throw new InvalidRoleException("TestRole - role name have invalid length.");
             }
 
             if (!role.RoleName.All(a => char.IsLetter(a) || char.IsWhiteSpace(a) || (a == '-')))
             {
-                return false;
+                throw new InvalidRoleException("TestRole - role name can not contain signs or digits.");
             }
 
-            return !char.IsLower(role.RoleName[0]);
+            if (char.IsLower(role.RoleName[0]))
+            {
+                throw new InvalidRoleException("TestRole - role name can not start with lower character.");
+            }
         }
     }
 }

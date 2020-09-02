@@ -40,7 +40,7 @@ namespace AuctionLogic.Business
         /// <exception cref="InvalidRoleStatusException">Only bidders can see the items!</exception>
         public void VerifyRoleStatus()
         {
-            User user = userRepository.GetActiveUser();
+            var user = userRepository.GetActiveUser();
 
             if (user.RoleStatus == 2)
             {
@@ -53,7 +53,7 @@ namespace AuctionLogic.Business
         /// <returns>Return a list of product that can be displayed.</returns>
         public List<ShownProduct> GetProductsDoesNotBelongToCurrentUser()
         {
-            Log.Info("GetProductsDoesntBelongToCurrentUser() was called.");
+            Log.Info("GetProductsDoesNotBelongToCurrentUser() was called.");
 
             VerifyRoleStatus();
 
@@ -68,14 +68,14 @@ namespace AuctionLogic.Business
         {
             Log.Info($"GetProductById({productId}) was called.");
 
-            Product product = productRepository.GetProductById(productId);
+            var product = productRepository.GetProductById(productId);
 
             List<int> list = productRepository.GetProductsThatDoesNotBelongToAUser(userRepository.GetActiveUser().ID)
                 .Select(x => x.Id).ToList();
 
-            bool ok = false;
+            var ok = false;
 
-            foreach (int x in list)
+            foreach (var x in list)
             {
                 if (x == product.ID)
                 {

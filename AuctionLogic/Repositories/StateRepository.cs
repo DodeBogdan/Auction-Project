@@ -32,19 +32,14 @@ namespace AuctionLogic.Repositories
 
         /// <summary>Adds the state.</summary>
         /// <param name="state">The state.</param>
-        /// <returns>Return the state of test.</returns>
-        public bool AddState(State state)
+        public void AddState(State state)
         {
             Log.Info("AddState was called.");
 
-            if (stateService.TestState(state))
-            {
-                auction.States.Add(state);
-                auction.SaveChanges();
-                return true;
-            }
+            stateService.TestState(state);
 
-            return false;
+            auction.States.Add(state);
+            auction.SaveChanges();
         }
     }
 }

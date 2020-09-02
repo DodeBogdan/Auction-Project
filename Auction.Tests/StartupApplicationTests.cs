@@ -83,7 +83,6 @@ namespace Auction.Tests
 
         /// <summary>Logs the in log in twice return user logged in exception.</summary>
         [TestMethod]
-       // [ExpectedException(typeof(UserLoggedInException))]
         public void LogIn_LogInTwice_ReturnUserLoggedInException()
         {
             try
@@ -121,22 +120,7 @@ namespace Auction.Tests
         [TestMethod]
         public void LogIn_WhenLoggedIn_UserHaveProviderRoleStatus()
         {
-            startupApplication.Register(
-                new User
-                {
-                    FirstName = "Silvia",
-                    LastName = "Brassoi",
-                    Email = "silvia.Brassoi@yahoo.com",
-                    Password = "Silvia",
-                    RoleStatus = 1,
-                    Age = 23,
-                    Gender = "M",
-                    CNP = "1123456789123",
-                    Adress = "Mandra nr. 61",
-                    Phone = "0712345678",
-                });
-
-            startupApplication.LogIn("silvia.Brassoi@yahoo.com", "Silvia", 2);
+            startupApplication.LogIn("Silvia.Brassoi@yahoo.com", "Silvia", 2);
 
             var email = auctionMock.Users
                 .Where(x => x.Active)
@@ -155,17 +139,7 @@ namespace Auction.Tests
         [ExpectedException(typeof(InvalidRoleStatusException))]
         public void LogIn_WhenLoggedIn_UserGiveWrongRoleSmallerThanOne()
         {
-            startupApplication.Register(
-                new User
-                {
-                    FirstName = "Silvia",
-                    LastName = "Brassoi",
-                    Email = "silvia.Brassoi@yahoo.com",
-                    Password = "Silvia",
-                    Age = 23,
-                });
-
-            startupApplication.LogIn("silvia.Brassoi@yahoo.com", "Silvia", 0);
+            startupApplication.LogIn("Silvia.Brassoi@yahoo.com", "Silvia", 0);
         }
 
         /// <summary>Logs the in when logged in user give wrong role higher than two.</summary>
@@ -173,17 +147,7 @@ namespace Auction.Tests
         [ExpectedException(typeof(InvalidRoleStatusException))]
         public void LogIn_WhenLoggedIn_UserGiveWrongRoleHigherThanTwo()
         {
-            startupApplication.Register(
-                new User
-                {
-                    FirstName = "Silvia",
-                    LastName = "Brassoi",
-                    Email = "silvia.Brassoi@yahoo.com",
-                    Password = "Silvia",
-                    Age = 23,
-                });
-
-            startupApplication.LogIn("silvia.Brassoi@yahoo.com", "Silvia", 3);
+            startupApplication.LogIn("Silvia.Brassoi@yahoo.com", "Silvia", 3);
         }
 
         /// <summary>Refreshes the when application starts set all expired products to false.</summary>

@@ -32,19 +32,14 @@ namespace AuctionLogic.Repositories
 
         /// <summary>Adds the role.</summary>
         /// <param name="role">The role.</param>
-        /// <returns>Return the state of test.</returns>
-        public bool AddRole(Role role)
+        public void AddRole(Role role)
         {
             Log.Info("AddRole was called.");
 
-            if (roleService.TestRole(role))
-            {
-                auction.Roles.Add(role);
-                auction.SaveChanges();
-                return true;
-            }
+            roleService.TestRole(role);
 
-            return false;
+            auction.Roles.Add(role);
+            auction.SaveChanges();
         }
     }
 }

@@ -3,10 +3,9 @@
 //     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-
 namespace Auction.Tests
 {
-    using System.Linq;
+    using System;
     using AuctionLogic.Models;
     using AuctionLogic.Repositories;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -39,14 +38,23 @@ namespace Auction.Tests
                 Name = "Active"
             };
 
-            Assert.IsTrue(stateRepository.AddState(state));
+            stateRepository.AddState(state);
         }
 
         /// <summary>Adds the state when state is null return false.</summary>
         [TestMethod]
         public void AddState_WhenStateIsNull_ReturnFalse()
         {
-            Assert.IsFalse(stateRepository.AddState(null));
+            try
+            {
+                stateRepository.AddState(null);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestState - state can not be null.", ex.Message);
+            }
         }
 
         /// <summary>Adds the state state have null name return false.</summary>
@@ -58,7 +66,16 @@ namespace Auction.Tests
                 Name = null
             };
 
-            Assert.IsFalse(stateRepository.AddState(state));
+            try
+            {
+                stateRepository.AddState(state);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestState - state name can not be null.", ex.Message);
+            }
         }
 
         /// <summary>Adds the state state have empty name return false.</summary>
@@ -70,7 +87,16 @@ namespace Auction.Tests
                 Name = string.Empty
             };
 
-            Assert.IsFalse(stateRepository.AddState(state));
+            try
+            {
+                stateRepository.AddState(state);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestState - state name can not be empty.", ex.Message);
+            }
         }
 
         /// <summary>Adds the state state have smaller name return false.</summary>
@@ -82,7 +108,16 @@ namespace Auction.Tests
                 Name = "Ac"
             };
 
-            Assert.IsFalse(stateRepository.AddState(state));
+            try
+            {
+                stateRepository.AddState(state);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestState - state name have invalid length.", ex.Message);
+            }
         }
 
         /// <summary>Adds the state state have longer name return false.</summary>
@@ -94,7 +129,16 @@ namespace Auction.Tests
                 Name = "Activeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
             };
 
-            Assert.IsFalse(stateRepository.AddState(state));
+            try
+            {
+                stateRepository.AddState(state);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestState - state name have invalid length.", ex.Message);
+            }
         }
 
         /// <summary>Adds the state state have lower name return false.</summary>
@@ -106,7 +150,16 @@ namespace Auction.Tests
                 Name = "active"
             };
 
-            Assert.IsFalse(stateRepository.AddState(state));
+            try
+            {
+                stateRepository.AddState(state);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestState - state name can not start with lower character.", ex.Message);
+            }
         }
 
         /// <summary>Adds the state state have digit name return false.</summary>
@@ -118,7 +171,16 @@ namespace Auction.Tests
                 Name = "Active1"
             };
 
-            Assert.IsFalse(stateRepository.AddState(state));
+            try
+            {
+                stateRepository.AddState(state);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestState - state name can not contain signs or digits.", ex.Message);
+            }
         }
 
         /// <summary>Adds the state state have symbol name return false.</summary>
@@ -130,7 +192,16 @@ namespace Auction.Tests
                 Name = "Active@#"
             };
 
-            Assert.IsFalse(stateRepository.AddState(state));
+            try
+            {
+                stateRepository.AddState(state);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestState - state name can not contain signs or digits.", ex.Message);
+            }
         }
     }
 }

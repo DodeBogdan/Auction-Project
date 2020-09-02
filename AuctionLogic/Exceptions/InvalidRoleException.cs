@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="InvalidCategoryException.cs" company="Transilvania University of Brasov">
+// <copyright file="InvalidRoleException.cs" company="Transilvania University of Brasov">
 //     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -7,13 +7,13 @@ namespace AuctionLogic.Exceptions
 {
     using System;
 
-    /// <summary>Invalid Category Exception</summary>
+    /// <summary>Invalid role exception</summary>
     [Serializable]
-    internal class InvalidCategoryException : Exception
+    internal class InvalidRoleException : Exception
     {
-        /// <summary>Initializes a new instance of the <see cref="InvalidCategoryException" /> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="InvalidRoleException" /> class.</summary>
         /// <param name="message">The message that describes the error.</param>
-        public InvalidCategoryException(string message) : base(message)
+        public InvalidRoleException(string message) : base(message)
         {
         }
     }

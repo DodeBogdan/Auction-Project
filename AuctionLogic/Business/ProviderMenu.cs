@@ -61,7 +61,7 @@ namespace AuctionLogic.Business
         {
             Log.Info("VerifyRoleStatus() was called");
 
-            User user = userRepository.GetActiveUser();
+            var user = userRepository.GetActiveUser();
 
             if (user.RoleStatus == 1)
             {
@@ -80,7 +80,7 @@ namespace AuctionLogic.Business
 
             VerifyRoleStatus();
 
-            User user = userRepository.GetActiveUser();
+            var user = userRepository.GetActiveUser();
 
             if (user.BannedTime > DateTime.Now)
             {
@@ -89,7 +89,7 @@ namespace AuctionLogic.Business
                 throw new BannedTimeException("You cannot place products while your account is pending.");
             }
 
-            int noOfProductsActivesOfUser = GetNoOfProductsActivesOfUser(product.IDUser);
+            var noOfProductsActivesOfUser = GetNoOfProductsActivesOfUser(product.IDUser);
 
             if (noOfProductsActivesOfUser >= ApplicationHelp.StartedAndUnfinishedBids)
             {
@@ -97,7 +97,7 @@ namespace AuctionLogic.Business
                 throw new StartedAndUnfinishedException("You have too many auctions started and unfinished.");
             }
 
-            int noOfProductsActivesOfUserByCategory = GetNoOfProductsActivesOfUserByCategory(product.IDUser, product.IDCategory);
+            var noOfProductsActivesOfUserByCategory = GetNoOfProductsActivesOfUserByCategory(product.IDUser, product.IDCategory);
 
             if (noOfProductsActivesOfUserByCategory >= ApplicationHelp.StartedAndUnfinishedBidsByCategory)
             {

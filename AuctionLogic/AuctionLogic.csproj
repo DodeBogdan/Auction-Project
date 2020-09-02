@@ -77,7 +77,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Exceptions\InvalidRoleException.cs" />
+    <Compile Include="Exceptions\InvalidStateException.cs" />
     <Compile Include="Exceptions\InvalidCategoryException.cs" />
     <Compile Include="Models\AuctionDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -93,6 +94,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AuctionDB.edmx</DependentUpon>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Models\Category.cs">
       <DependentUpon>AuctionDB.tt</DependentUpon>
@@ -152,7 +154,9 @@
       <DependentUpon>AuctionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />

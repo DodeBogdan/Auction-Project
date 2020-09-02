@@ -6,6 +6,7 @@
 namespace AuctionLogic.Business
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using Exceptions;
@@ -20,17 +21,17 @@ namespace AuctionLogic.Business
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>The auction database</summary>
-        private readonly AuctionDB auctionDB;
+        private readonly AuctionDB auctionDb;
 
         /// <summary>The user repository</summary>
         private readonly UserRepository userRepository;
 
         /// <summary>Initializes a new instance of the <see cref="StartupApplication" /> class.</summary>
-        /// <param name="auctionDB">The auction database.</param>
-        public StartupApplication(AuctionDB auctionDB)
+        /// <param name="auctionDb">The auction database.</param>
+        public StartupApplication(AuctionDB auctionDb)
         {
-            this.auctionDB = auctionDB;
-            userRepository = new UserRepository(auctionDB);
+            this.auctionDb = auctionDb;
+            userRepository = new UserRepository(auctionDb);
 
             Refresh();
         }
@@ -53,7 +54,7 @@ namespace AuctionLogic.Business
                 throw new InvalidRoleStatusException("Invalid role.");
             }
 
-            var currentUser = auctionDB.Users.FirstOrDefault(x => x.Email == email);
+            var currentUser = auctionDb.Users.FirstOrDefault(x => x.Email == email);
 
             if (currentUser == null)
             {
@@ -75,7 +76,7 @@ namespace AuctionLogic.Business
 
             currentUser.Active = true;
             currentUser.RoleStatus = role;
-            auctionDB.SaveChanges();
+            auctionDb.SaveChanges();
         }
 
         /// <summary>Registers the specified user.</summary>
@@ -93,15 +94,16 @@ namespace AuctionLogic.Business
         /// </summary>
         public void Refresh()
         {
-            IQueryable<Product> products = auctionDB.Products
-                .Where(x => x.EndDate < DateTime.Now);
+            List<Product> products = auctionDb.Products
+                .Where(x => x.EndDate < DateTime.Now)
+                .ToList();
 
-            foreach (Product p in products)
+            foreach (var p in products)
             {
                 p.Active = false;
             }
 
-            auctionDB.SaveChanges();
+            auctionDb.SaveChanges();
         }
     }
 }

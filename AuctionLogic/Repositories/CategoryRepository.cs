@@ -3,14 +3,12 @@
 //     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-
-using AuctionLogic.Exceptions;
-
 namespace AuctionLogic.Repositories
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using AuctionLogic.Exceptions;
     using Business;
     using log4net;
     using Models;
@@ -36,7 +34,6 @@ namespace AuctionLogic.Repositories
 
         /// <summary>Adds the category.</summary>
         /// <param name="category">The category.</param>
-        /// <returns>Return true if it's all ok.</returns>
         public void AddCategory(Category category)
         {
             Log.Info("AddCategory was called.");
@@ -72,7 +69,7 @@ namespace AuctionLogic.Repositories
 
             categoryService.TestCategoryParent(categorySon, categoryParent);
 
-            Category sonCategory = GetCategoryById(categorySon);
+            var sonCategory = GetCategoryById(categorySon);
 
             if (sonCategory == null)
             {
@@ -89,11 +86,11 @@ namespace AuctionLogic.Repositories
                 }
             }
 
-            for (int index = 0; index < parentCategories.Count; index++)
+            for (var index = 0; index < parentCategories.Count; index++)
             {
-                ICollection<Category> cat = GetCategoryById(parentCategories[index]).ParentsList;
+                List<Category> cat = GetCategoryById(parentCategories[index]).ParentsList.ToList();
 
-                foreach (Category c in cat)
+                foreach (var c in cat)
                 {
                     if (!parentCategories.Contains(c.ID))
                     {

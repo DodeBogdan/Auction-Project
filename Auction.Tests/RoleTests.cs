@@ -6,7 +6,7 @@
 
 namespace Auction.Tests
 {
-    using System.Linq;
+    using System;
     using AuctionLogic.Models;
     using AuctionLogic.Repositories;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -30,107 +30,180 @@ namespace Auction.Tests
             roleRepository = new RoleRepository(auctionMock);
         }
 
-        /// <summary>Adds the role valid role return true.</summary>
+        /// <summary>Adds the role valid role insert role.</summary>
         [TestMethod]
-        public void AddRole_ValidRole_ReturnTrue()
+        public void AddRole_ValidRole_InsertRole()
         {
             var role = new Role
             {
                 RoleName = "Bidder"
             };
 
-            Assert.IsTrue(roleRepository.AddRole(role));
+            roleRepository.AddRole(role);
         }
 
-        /// <summary>Adds the role when role is null return false.</summary>
+        /// <summary>Adds the role when role is null expected exception.</summary>
         [TestMethod]
-        public void AddRole_WhenRoleIsNull_ReturnFalse()
+        public void AddRole_WhenRoleIsNull_ExpectedException()
         {
-            Assert.IsFalse(roleRepository.AddRole(null));
+            try
+            {
+                roleRepository.AddRole(null);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestRole - role can not be null.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the role role have null name return false.</summary>
+        /// <summary>Adds the role role have null name expected exception.</summary>
         [TestMethod]
-        public void AddRole_RoleHaveNullName_ReturnFalse()
+        public void AddRole_RoleHaveNullName_ExpectedException()
         {
             var role = new Role
             {
                 RoleName = null
             };
 
-            Assert.IsFalse(roleRepository.AddRole(role));
+            try
+            {
+                roleRepository.AddRole(role);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestRole - role name can not be null.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the role role have empty name return false.</summary>
+        /// <summary>Adds the role role have empty name expected exception.</summary>
         [TestMethod]
-        public void AddRole_RoleHaveEmptyName_ReturnFalse()
+        public void AddRole_RoleHaveEmptyName_ExpectedException()
         {
             var role = new Role
             {
                 RoleName = string.Empty
             };
 
-            Assert.IsFalse(roleRepository.AddRole(role));
+            try
+            {
+                roleRepository.AddRole(role);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestRole - role name can not be empty.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the role role have smaller name return false.</summary>
+        /// <summary>Adds the role role have smaller name expected exception.</summary>
         [TestMethod]
-        public void AddRole_RoleHaveSmallerName_ReturnFalse()
+        public void AddRole_RoleHaveSmallerName_ExpectedException()
         {
             var role = new Role
             {
                 RoleName = "bi"
             };
 
-            Assert.IsFalse(roleRepository.AddRole(role));
+            try
+            {
+                roleRepository.AddRole(role);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestRole - role name have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the role role have longer name return false.</summary>
+        /// <summary>Adds the role role have longer name expected exception.</summary>
         [TestMethod]
-        public void AddRole_RoleHaveLongerName_ReturnFalse()
+        public void AddRole_RoleHaveLongerName_ExpectedException()
         {
             var role = new Role
             {
+                // ReSharper disable once StringLiteralTypo
                 RoleName = "Bideeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
             };
 
-            Assert.IsFalse(roleRepository.AddRole(role));
+            try
+            {
+                roleRepository.AddRole(role);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestRole - role name have invalid length.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the role role have lower name return false.</summary>
+        /// <summary>Adds the role role have lower name expected exception.</summary>
         [TestMethod]
-        public void AddRole_RoleHaveLowerName_ReturnFalse()
+        public void AddRole_RoleHaveLowerName_ExpectedException()
         {
             var role = new Role
             {
                 RoleName = "bidder"
             };
 
-            Assert.IsFalse(roleRepository.AddRole(role));
+            try
+            {
+                roleRepository.AddRole(role);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestRole - role name can not start with lower character.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the role role have digit name return false.</summary>
+        /// <summary>Adds the role role have digit name expected exception.</summary>
         [TestMethod]
-        public void AddRole_RoleHaveDigitName_ReturnFalse()
+        public void AddRole_RoleHaveDigitName_ExpectedException()
         {
             var role = new Role
             {
                 RoleName = "Bidder1"
             };
 
-            Assert.IsFalse(roleRepository.AddRole(role));
+            try
+            {
+                roleRepository.AddRole(role);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestRole - role name can not contain signs or digits.", ex.Message);
+            }
         }
 
-        /// <summary>Adds the role role have symbol name return false.</summary>
+        /// <summary>Adds the role role have symbol name expected exception.</summary>
         [TestMethod]
-        public void AddRole_RoleHaveSymbolName_ReturnFalse()
+        public void AddRole_RoleHaveSymbolName_ExpectedException()
         {
             var role = new Role
             {
                 RoleName = "Bidder@#"
             };
 
-            Assert.IsFalse(roleRepository.AddRole(role));
+            try
+            {
+                roleRepository.AddRole(role);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("TestRole - role name can not contain signs or digits.", ex.Message);
+            }
         }
     }
 }

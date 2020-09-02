@@ -3,12 +3,9 @@
 //     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-
-using System;
-
 namespace Auction.Tests
 {
-    using System.Linq;
+    using System;
     using AuctionLogic.Models;
     using AuctionLogic.Repositories;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -32,6 +29,7 @@ namespace Auction.Tests
             categoryRepository = new CategoryRepository(auctionMock);
         }
 
+        /// <summary>Adds the category valid category insert category.</summary>
         [TestMethod]
         public void AddCategory_ValidCategory_InsertCategory()
         {
@@ -43,6 +41,7 @@ namespace Auction.Tests
             categoryRepository.AddCategory(category);
         }
 
+        /// <summary>Adds the category when category is null expected exception.</summary>
         [TestMethod]
         public void AddCategory_WhenCategoryIsNull_ExpectedException()
         {
@@ -58,6 +57,7 @@ namespace Auction.Tests
             }
         }
 
+        /// <summary>Adds the category category have null name expected exception.</summary>
         [TestMethod]
         public void AddCategory_CategoryHaveNullName_ExpectedException()
         {
@@ -78,6 +78,7 @@ namespace Auction.Tests
             }
         }
 
+        /// <summary>Adds the category category have empty name expected exception.</summary>
         [TestMethod]
         public void AddCategory_CategoryHaveEmptyName_ExpectedException()
         {
@@ -94,10 +95,11 @@ namespace Auction.Tests
             }
             catch (Exception ex)
             {
-                Assert.AreEqual("TestCategory - category name can not pe empty.", ex.Message);
+                Assert.AreEqual("TestCategory - category name can not be empty.", ex.Message);
             }
         }
 
+        /// <summary>Adds the category category have smaller name expected exception.</summary>
         [TestMethod]
         public void AddCategory_CategoryHaveSmallerName_ExpectedException()
         {
@@ -118,6 +120,7 @@ namespace Auction.Tests
             }
         }
 
+        /// <summary>Adds the category category have longer name expected exception.</summary>
         [TestMethod]
         public void AddCategory_CategoryHaveLongerName_ExpectedException()
         {
@@ -138,6 +141,7 @@ namespace Auction.Tests
             }
         }
 
+        /// <summary>Adds the category category have lower name expected exception.</summary>
         [TestMethod]
         public void AddCategory_CategoryHaveLowerName_ExpectedException()
         {
@@ -158,6 +162,7 @@ namespace Auction.Tests
             }
         }
 
+        /// <summary>Adds the category category have digit name expected exception.</summary>
         [TestMethod]
         public void AddCategory_CategoryHaveDigitName_ExpectedException()
         {
@@ -178,6 +183,7 @@ namespace Auction.Tests
             }
         }
 
+        /// <summary>Adds the category category have symbol name expected exception.</summary>
         [TestMethod]
         public void AddCategory_CategoryHaveSymbolName_ExpectedException()
         {
@@ -198,6 +204,7 @@ namespace Auction.Tests
             }
         }
 
+        /// <summary>Adds the parent to category category son identifier smaller than zero expected exception.</summary>
         [TestMethod]
         public void AddParentToCategory_CategorySonIdSmallerThanZero_ExpectedException()
         {
@@ -213,6 +220,7 @@ namespace Auction.Tests
             }
         }
 
+        /// <summary>Adds the parent to category category parent identifier smaller than zero expected exception.</summary>
         [TestMethod]
         public void AddParentToCategory_CategoryParentIdSmallerThanZero_ExpectedException()
         {
@@ -228,6 +236,7 @@ namespace Auction.Tests
             }
         }
 
+        /// <summary>Adds the parent to category category son is the same with parent expected exception.</summary>
         [TestMethod]
         public void AddParentToCategory_CategorySonIsTheSameWithParent_ExpectedException()
         {
@@ -243,6 +252,7 @@ namespace Auction.Tests
             }
         }
 
+        /// <summary>Adds the parent to category category son is invalid expected exception.</summary>
         [TestMethod]
         public void AddParentToCategory_CategorySonIsInvalid_ExpectedException()
         {
@@ -258,6 +268,7 @@ namespace Auction.Tests
             }
         }
 
+        /// <summary>Adds the parent to category category parent is invalid expected exception.</summary>
         [TestMethod]
         public void AddParentToCategory_CategoryParentIsInvalid_ExpectedException()
         {
@@ -279,6 +290,7 @@ namespace Auction.Tests
             }
         }
 
+        /// <summary>Adds the parent to category insert with success work successful.</summary>
         [TestMethod]
         public void AddParentToCategory_InsertWithSuccess_WorkSuccessful()
         {
@@ -295,9 +307,9 @@ namespace Auction.Tests
             });
 
             categoryRepository.AddParentToCategory(2, 1);
-
         }
 
+        /// <summary>Gets the category by identifier when call the method return correct category.</summary>
         [TestMethod]
         public void GetCategoryByID_WhenCallTheMethod_ReturnCorrectCategory()
         {
@@ -314,6 +326,7 @@ namespace Auction.Tests
             Assert.IsTrue(category == result);
         }
 
+        /// <summary>Adds the parent to category cannot insert parent if the son have a bound with a child of parent expected exception.</summary>
         [TestMethod]
         public void AddParentToCategory_CannotInsertParentIfTheSonHaveABoundWithAChildOfParent_ExpectedException()
         {
