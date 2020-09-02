@@ -1,9 +1,9 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="RoleService.cs" company="Transilvania University of Brasov">
-//     Copyright (c) Brassoi Silvia Maria. All rights reserved.
+//     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace AuctionLogic.Bussines
+namespace AuctionLogic.Business
 {
     using System.Linq;
     using System.Reflection;
@@ -49,7 +49,7 @@ namespace AuctionLogic.Bussines
                 return false;
             }
 
-            return !char.IsLower(role.RoleName.First());
+            return !char.IsLower(role.RoleName[0]);
         }
     }
 }

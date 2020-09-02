@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ProductTests.cs" company="Transilvania University of Brasov">
-//     Copyright (c) Brassoi Silvia Maria. All rights reserved.
+//     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -9,7 +9,7 @@ namespace Auction.Tests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using AuctionLogic.Bussines;
+    using AuctionLogic.Business;
     using AuctionLogic.Models;
     using AuctionLogic.Repositories;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -480,6 +480,11 @@ namespace Auction.Tests
                 IDCategory = 1,
                 StartDate = startDate,
                 EndDate = startDate.AddMonths(5),
+
+                StartPrice = 15.34,
+                Specification = "Quality pictures. Good colors.",
+                Coin = "RON",
+                Active = true,
             };
 
             Assert.IsFalse(productRepository.AddProduct(product));
@@ -848,7 +853,7 @@ namespace Auction.Tests
             });
 
             Product product = auctionMock.Products
-                .Where(x => x.ID == 10).Single();
+                .Where(x => x.ID == 10).SingleOrDefault();
 
             product.Category = new Category();
 

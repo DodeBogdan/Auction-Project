@@ -1,9 +1,9 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="BidderMenu.cs" company="Transilvania University of Brasov">
-//     Copyright (c) Brassoi Silvia Maria. All rights reserved.
+//     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace AuctionLogic.Bussines
+namespace AuctionLogic.Business
 {
     using System;
     using System.Collections.Generic;
@@ -175,7 +175,7 @@ namespace AuctionLogic.Bussines
         }
 
         /// <summary>Bids for product.</summary>
-        /// <param name="productID">The product identifier.</param>
+        /// <param name="productId">The product identifier.</param>
         /// <param name="price">The price.</param>
         /// <param name="coin">The coin.</param>
         /// <exception cref="InvalidUserException">You can't bid for an item you're in the lead.</exception>
@@ -189,11 +189,11 @@ namespace AuctionLogic.Bussines
         /// or
         /// The price is too high.
         /// </exception>
-        public void BidForProduct(int productID, double price, string coin)
+        public void BidForProduct(int productId, double price, string coin)
         {
-            Log.Info($"BidForProduct({productID}, {price}, {coin}) was called");
+            Log.Info($"BidForProduct({productId}, {price}, {coin}) was called");
 
-            Product product = productRepository.GetProductById(productID);
+            Product product = productRepository.GetProductById(productId);
 
             if (product.AuctedUser == userRepository.GetActiveUser().ID)
             {

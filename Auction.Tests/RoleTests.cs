@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="RoleTests.cs" company="Transilvania University of Brasov">
-//     Copyright (c) Brassoi Silvia Maria. All rights reserved.
+//     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -131,18 +131,6 @@ namespace Auction.Tests
             };
 
             Assert.IsFalse(roleRepository.AddRole(role));
-        }
-
-        /// <summary>Roles the get users by role return a list of users.</summary>
-        [TestMethod]
-        public void Role_GetUsersByRole_ReturnAListOfUsers()
-        {
-            auctionMock.Roles.Add(new Role { ID = 1, RoleName = "Bidder" });
-
-            Role role = auctionMock.Roles
-                .Single(x => x.ID == 1);
-
-            Assert.IsTrue(role.Users.Count == 0);
         }
     }
 }

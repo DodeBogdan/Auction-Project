@@ -1,9 +1,4 @@
-﻿//---------------------------------------------------------------
-// <copyright file="AuctionDB.Designer.cs" company="Transilvania University of Brasov">
-//     Copyright (c) Brassoi Silvia Maria. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
-// T4 code generation is enabled for model 'C:\Users\Bogdan\Desktop\Auction - Brassoi Silvia Maria\Restanta ASSE\Models\AuctionDB.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Bogdan\Desktop\Auction Project\AuctionLogic\Models\AuctionDB.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

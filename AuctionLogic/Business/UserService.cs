@@ -1,9 +1,9 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="UserService.cs" company="Transilvania University of Brasov">
-//     Copyright (c) Brassoi Silvia Maria. All rights reserved.
+//     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace AuctionLogic.Bussines
+namespace AuctionLogic.Business
 {
     using System.Linq;
     using System.Reflection;
@@ -45,7 +45,7 @@ namespace AuctionLogic.Bussines
                 return false;
             }
 
-            if (char.IsLower(user.FirstName.First()))
+            if (char.IsLower(user.FirstName[0]))
             {
                 return false;
             }
@@ -75,7 +75,7 @@ namespace AuctionLogic.Bussines
                 return false;
             }
 
-            if (char.IsLower(user.LastName.First()))
+            if (char.IsLower(user.LastName[0]))
             {
                 return false;
             }
@@ -107,7 +107,7 @@ namespace AuctionLogic.Bussines
                 return false;
             }
 
-            if (char.IsLower(user.Password.First()))
+            if (char.IsLower(user.Password[0]))
             {
                 return false;
             }
@@ -144,7 +144,7 @@ namespace AuctionLogic.Bussines
                 return false;
             }
 
-            if (char.IsLower(user.Gender.First()))
+            if (char.IsLower(user.Gender[0]))
             {
                 return false;
             }
@@ -164,12 +164,12 @@ namespace AuctionLogic.Bussines
                 return false;
             }
 
-            if ((user.Gender.First() == 'M' && user.CNP[0] != '1') && (user.Gender.First() == 'M' && user.CNP[0] != '5'))
+            if ((user.Gender[0] == 'M' && user.CNP[0] != '1') && (user.Gender[0] == 'M' && user.CNP[0] != '5'))
             {
                 return false;
             }
 
-            if ((user.Gender.First() == 'F' && user.CNP[0] != '2') && (user.Gender.First() == 'F' && user.CNP[0] != '6'))
+            if ((user.Gender[0] == 'F' && user.CNP[0] != '2') && (user.Gender[0] == 'F' && user.CNP[0] != '6'))
             {
                 return false;
             }
@@ -194,7 +194,7 @@ namespace AuctionLogic.Bussines
                 return false;
             }
 
-            if (char.IsLower(user.Adress.First()))
+            if (char.IsLower(user.Adress[0]))
             {
                 return false;
             }

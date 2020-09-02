@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------
 // <copyright file="AssemblyInfo.cs" company="Transilvania University of Brasov">
-//     Copyright (c) Brassoi Silvia Maria. All rights reserved.
+//     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -8,11 +8,11 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Auction.Tests")]
-[assembly: AssemblyDescription("Application for collage.")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Transilvania University of Brasov")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Auction.Tests")]
-[assembly: AssemblyCopyright("Silvia Maria Brassoi")]
+[assembly: AssemblyCopyright("Bogdan Gheorghe Nicolae")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

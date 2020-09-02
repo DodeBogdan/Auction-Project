@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Exceptions\InvalidCategoryException.cs" />
     <Compile Include="Models\AuctionDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -99,7 +100,7 @@
     <Compile Include="Exceptions\BannedTimeException.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Bussines\BidderMenu.cs">
+    <Compile Include="Business\BidderMenu.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Exceptions\InvalidScoreException.cs">
@@ -123,8 +124,8 @@
     <Compile Include="Exceptions\InvalidRoleStatusException.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Bussines\ProviderMenu.cs" />
-    <Compile Include="Bussines\CategoryService.cs" />
+    <Compile Include="Business\ProviderMenu.cs" />
+    <Compile Include="Business\CategoryService.cs" />
     <Compile Include="Exceptions\StartedAndUnfinishedByCategoryException.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
@@ -137,14 +138,14 @@
     <Compile Include="Exceptions\InvalidUserException.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Bussines\ProductService.cs" />
-    <Compile Include="Bussines\RoleService.cs" />
-    <Compile Include="Bussines\StartupApplication.cs" />
-    <Compile Include="Bussines\StateService.cs" />
+    <Compile Include="Business\ProductService.cs" />
+    <Compile Include="Business\RoleService.cs" />
+    <Compile Include="Business\StartupApplication.cs" />
+    <Compile Include="Business\StateService.cs" />
     <Compile Include="Exceptions\UserLoggedInException.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Bussines\UserService.cs" />
+    <Compile Include="Business\UserService.cs" />
     <Compile Include="Help\ApplicationHelp.cs" />
     <Compile Include="Models\ShownProduct.cs" />
     <Compile Include="Models\Product.cs">

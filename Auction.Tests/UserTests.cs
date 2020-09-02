@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="UserTests.cs" company="Transilvania University of Brasov">
-//     Copyright (c) Brassoi Silvia Maria. All rights reserved.
+//     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -8,7 +8,7 @@ namespace Auction.Tests
 {
     using System;
     using System.Linq;
-    using AuctionLogic.Bussines;
+    using AuctionLogic.Business;
     using AuctionLogic.Exceptions;
     using AuctionLogic.Models;
     using AuctionLogic.Repositories;
@@ -1135,7 +1135,7 @@ namespace Auction.Tests
                 AuctedUser = 2,
                 Score = 4.23,
                 Active = false,
-                Specification = "Merge bine afara.",
+                Specification = "Works nice outside.",
                 Coin = "RON"
             });
 
@@ -1149,69 +1149,7 @@ namespace Auction.Tests
             user = auctionMock.Users
                 .SingleOrDefault(x => x.ID == 1);
 
-            Assert.IsTrue(user.BannedTime != null);
-        }
-
-        /// <summary>Products the get products by user return list of products.</summary>
-        [TestMethod]
-        public void Products_GetProductsByUser_ReturnListOfProducts()
-        {
-            auctionMock.Users.Add(new User
-            {
-                ID = 1,
-                FirstName = "Silvia",
-                LastName = "Brassoi",
-                Age = 23,
-                Email = "Silvia.Brassoi@yahoo.com",
-                Password = "Silvia",
-                RoleStatus = 1,
-            });
-
-            User user = auctionMock.Users.Single(x => x.ID == 1);
-
-            Assert.IsTrue(user.Products.Count == 0);
-        }
-
-        /// <summary>Products1s the get products by user return list of products.</summary>
-        [TestMethod]
-        public void Products1_GetProductsByUser_ReturnListOfProducts()
-        {
-            auctionMock.Users.Add(new User
-            {
-                ID = 1,
-                FirstName = "Silvia",
-                LastName = "Brassoi",
-                Age = 23,
-                Email = "Silvia.Brassoi@yahoo.com",
-                Password = "Silvia",
-                RoleStatus = 1,
-            });
-
-            User user = auctionMock.Users.Single(x => x.ID == 1);
-
-            Assert.IsTrue(user.Products1.Count == 0);
-        }
-
-        /// <summary>Roles the get role by user get role.</summary>
-        [TestMethod]
-        public void Role_GetRoleByUser_GetRole()
-        {
-            auctionMock.Users.Add(new User
-            {
-                ID = 1,
-                FirstName = "Silvia",
-                LastName = "Brassoi",
-                Age = 23,
-                Email = "Silvia.Brassoi@yahoo.com",
-                Password = "Silvia",
-                RoleStatus = 1,
-            });
-
-            User user = auctionMock.Users.Single(x => x.ID == 1);
-
-            user.Role = new Role();
-
-            Assert.IsTrue(user.Role.ID == 0);
+            Assert.IsTrue(user?.BannedTime != null);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="StartupApplicationTests.cs" company="Transilvania University of Brasov">
-//     Copyright (c) Brassoi Silvia Maria. All rights reserved.
+//     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -8,7 +8,7 @@ namespace Auction.Tests
 {
     using System;
     using System.Linq;
-    using AuctionLogic.Bussines;
+    using AuctionLogic.Business;
     using AuctionLogic.Exceptions;
     using AuctionLogic.Models;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -83,11 +83,20 @@ namespace Auction.Tests
 
         /// <summary>Logs the in log in twice return user logged in exception.</summary>
         [TestMethod]
-        [ExpectedException(typeof(UserLoggedInException))]
+       // [ExpectedException(typeof(UserLoggedInException))]
         public void LogIn_LogInTwice_ReturnUserLoggedInException()
         {
-            startupApplication.LogIn("Silvia.Brassoi@yahoo.com", "Silvia", 1);
-            startupApplication.LogIn("Silvia.Brassoi@yahoo.com", "Silvia", 1);
+            try
+            {
+                startupApplication.LogIn("Silvia.Brassoi@yahoo.com", "Silvia", 1);
+                startupApplication.LogIn("Silvia.Brassoi@yahoo.com", "Silvia", 1);
+
+                Assert.Fail("Expected exception was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("The user is already logged in.", ex.Message);
+            }
         }
 
         /// <summary>Logs the in when logged in user have bidder role status.</summary>
@@ -98,12 +107,12 @@ namespace Auction.Tests
 
             var email = auctionMock.Users
                 .Where(x => x.Active)
-                .Select(x => x.Email).FirstOrDefault();
+                .Select(x => x.Email).SingleOrDefault();
 
             string role = (from users in auctionMock.Users
                            join roles in auctionMock.Roles on users.RoleStatus equals roles.ID
                            where users.Email == email
-                           select roles.RoleName).First();
+                           select roles.RoleName).SingleOrDefault();
 
             Assert.IsTrue(role.Trim() == "Bidder", role);
         }
@@ -131,14 +140,14 @@ namespace Auction.Tests
 
             var email = auctionMock.Users
                 .Where(x => x.Active)
-                .Select(x => x.Email).FirstOrDefault();
+                .Select(x => x.Email).SingleOrDefault();
 
-            string role = (from users in auctionMock.Users
+            var role = (from users in auctionMock.Users
                            join roles in auctionMock.Roles on users.RoleStatus equals roles.ID
                            where users.Email == email
-                           select roles.RoleName).First();
+                           select roles.RoleName).SingleOrDefault();
 
-            Assert.IsTrue(role.Trim() == "Provider", role);
+            Assert.IsTrue(role != null && role.Trim() == "Provider", role);
         }
 
         /// <summary>Logs the in when logged in user give wrong role smaller than one.</summary>

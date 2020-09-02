@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="StateTests.cs" company="Transilvania University of Brasov">
-//     Copyright (c) Brassoi Silvia Maria. All rights reserved.
+//     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -131,17 +131,6 @@ namespace Auction.Tests
             };
 
             Assert.IsFalse(stateRepository.AddState(state));
-        }
-
-        /// <summary>States the get products get list of products.</summary>
-        [TestMethod]
-        public void State_GetProducts_GetListOfProducts()
-        {
-            auctionMock.States.Add(new State { ID = 1, Name = "New" });
-
-            State state = auctionMock.States.Single(x => x.ID == 1);
-
-            Assert.IsTrue(state.Products.Count == 0);
         }
     }
 }

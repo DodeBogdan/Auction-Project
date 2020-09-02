@@ -1,14 +1,17 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="CategoryRepository.cs" company="Transilvania University of Brasov">
-//     Copyright (c) Brassoi Silvia Maria. All rights reserved.
+//     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
+using AuctionLogic.Exceptions;
+
 namespace AuctionLogic.Repositories
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Bussines;
+    using Business;
     using log4net;
     using Models;
 
@@ -34,18 +37,14 @@ namespace AuctionLogic.Repositories
         /// <summary>Adds the category.</summary>
         /// <param name="category">The category.</param>
         /// <returns>Return true if it's all ok.</returns>
-        public bool AddCategory(Category category)
+        public void AddCategory(Category category)
         {
-            Log.Info("AddCategory wass called.");
+            Log.Info("AddCategory was called.");
 
-            if (categoryService.TestCategory(category))
-            {
-                auction.Categories.Add(category);
-                auction.SaveChanges();
-                return true;
-            }
+            categoryService.TestCategory(category);
 
-            return false;
+            auction.Categories.Add(category);
+            auction.SaveChanges();
         }
 
         /// <summary>Gets the category by identifier.</summary>
@@ -54,28 +53,30 @@ namespace AuctionLogic.Repositories
         public Category GetCategoryById(int categoryId)
         {
             return auction.Categories
-                     .Where(x => x.ID == categoryId)
-                     .SingleOrDefault();
+                .SingleOrDefault(x => x.ID == categoryId);
         }
 
         /// <summary>Adds the parent to category.</summary>
         /// <param name="categorySon">The category son.</param>
         /// <param name="categoryParent">The category parent.</param>
-        /// <returns>Return true or false.</returns>
-        public bool AddParentToCategory(int categorySon, int categoryParent)
+        /// <exception cref="AuctionLogic.Exceptions.InvalidCategoryException">
+        /// AddParentToCategory - there are no items with categorySon id.
+        /// or
+        /// AddParentToCategory - categorySon is already bound with a son of categoryParent
+        /// or
+        /// AddParentToCategory - there are no items with categoryParent id.
+        /// </exception>
+        public void AddParentToCategory(int categorySon, int categoryParent)
         {
-            Log.Info("AddParentToCategory wass called.");
+            Log.Info("AddParentToCategory was called.");
 
-            if (categoryService.TestCategoryParent(categorySon, categoryParent) == false)
-            {
-                return false;
-            }
+            categoryService.TestCategoryParent(categorySon, categoryParent);
 
             Category sonCategory = GetCategoryById(categorySon);
 
             if (sonCategory == null)
             {
-                return false;
+                throw new InvalidCategoryException("AddParentToCategory - there are no items with categorySon id.");
             }
 
             List<int> parentCategories = new List<int>();
@@ -103,21 +104,20 @@ namespace AuctionLogic.Repositories
 
             if (parentCategories.Contains(categoryParent))
             {
-                return false;
+                throw new InvalidCategoryException("AddParentToCategory - categorySon is already bound with a son of categoryParent.");
             }
 
             Category parentCategory = GetCategoryById(categoryParent);
 
             if (parentCategory == null)
             {
-                return false;
+                throw new InvalidCategoryException("AddParentToCategory - there are no items with categoryParent id.");
             }
 
             sonCategory.ParentsList.Add(parentCategory);
             parentCategory.SonsList.Add(sonCategory);
 
             auction.SaveChanges();
-            return true;
         }
     }
 }

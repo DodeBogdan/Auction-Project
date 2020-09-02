@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="UserRepository.cs" company="Transilvania University of Brasov">
-//     Copyright (c) Brassoi Silvia Maria. All rights reserved.
+//     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -9,7 +9,7 @@ namespace AuctionLogic.Repositories
     using System;
     using System.Linq;
     using System.Reflection;
-    using Bussines;
+    using Business;
     using Exceptions;
     using Help;
     using log4net;
@@ -59,7 +59,7 @@ namespace AuctionLogic.Repositories
 
             var user = auction.Users
                 .Where(x => x.Active)
-                .FirstOrDefault();
+                .SingleOrDefault();
 
             if (user == null)
             {

@@ -7,15 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-
 namespace AuctionLogic.Models
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class User
     {
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
             this.Products = new HashSet<Product>();
@@ -31,15 +30,15 @@ namespace AuctionLogic.Models
         public double Score { get; set; }
         public int RoleStatus { get; set; }
         public bool Active { get; set; }
-        public Nullable<DateTime> BannedTime { get; set; }
+        public Nullable<System.DateTime> BannedTime { get; set; }
         public string Gender { get; set; }
         public string CNP { get; set; }
         public string Adress { get; set; }
         public string Phone { get; set; }
     
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products1 { get; set; }
         public virtual Role Role { get; set; }
     }

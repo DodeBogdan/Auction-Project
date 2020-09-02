@@ -1,9 +1,9 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ProductService.cs" company="Transilvania University of Brasov">
-//     Copyright (c) Brassoi Silvia Maria. All rights reserved.
+//     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace AuctionLogic.Bussines
+namespace AuctionLogic.Business
 {
     using System;
     using System.Linq;
@@ -45,7 +45,7 @@ namespace AuctionLogic.Bussines
                 return false;
             }
 
-            if (char.IsLower(product.Name.First()))
+            if (char.IsLower(product.Name[0]))
             {
                 return false;
             }
@@ -65,7 +65,7 @@ namespace AuctionLogic.Bussines
                 return false;
             }
 
-            if (char.IsLower(product.Description.First()))
+            if (char.IsLower(product.Description[0]))
             {
                 return false;
             }
@@ -107,22 +107,12 @@ namespace AuctionLogic.Bussines
 
             DateTime now = DateTime.Now;
 
-            if (product.StartDate == null)
-            {
-                return false;
-            }
-
             if (product.StartDate < now)
             {
                 return false;
             }
 
             if (product.StartDate > now.AddMonths(4))
-            {
-                return false;
-            }
-
-            if (product.EndDate == null)
             {
                 return false;
             }
@@ -187,7 +177,7 @@ namespace AuctionLogic.Bussines
                 return false;
             }
 
-            if (char.IsLower(product.Specification.First()))
+            if (char.IsLower(product.Specification[0]))
             {
                 return false;
             }

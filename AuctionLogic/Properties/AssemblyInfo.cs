@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="AssemblyInfo.cs" company="Transilvania University of Brasov">
-//     Copyright (c) Brassoi Silvia Maria. All rights reserved.
+//     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -13,11 +13,11 @@ using log4net.Config;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("AuctionLogic")]
-[assembly: AssemblyDescription("Application for collage.")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Transilvania University of Brasov")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("AuctionLogic")]
-[assembly: AssemblyCopyright("Brassoi Silvia Maria")]
+[assembly: AssemblyCopyright("Bogdan Gheorghe Nicolae")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

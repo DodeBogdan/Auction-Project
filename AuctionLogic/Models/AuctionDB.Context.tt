@@ -12,7 +12,7 @@ var itemCollection = loader.CreateEdmItemCollection(inputFile);
 var modelNamespace = loader.GetModelNamespace(inputFile);
 var codeStringGenerator = new CodeStringGenerator(code, typeMapper, ef);
 
-var container = itemCollection.OfType<EntityContainer>().FirstOrDefault();
+var container = itemCollection.OfType<EntityContainer>().SingleOrDefault();
 if (container == null)
 {
     return string.Empty;
@@ -397,7 +397,7 @@ public class TypeMapper
         var typeName = _code.Escape(edmType.MetadataProperties
                                 .Where(p => p.Name == ExternalTypeNameAttributeName)
                                 .Select(p => (string)p.Value)
-                                .FirstOrDefault())
+                                .SingleOrDefault())
             ?? (modelNamespace != null && edmType.NamespaceName != modelNamespace ?
                 _code.CreateFullName(_code.EscapeNamespace(edmType.NamespaceName), _code.Escape(edmType)) :
                 _code.Escape(edmType));
@@ -597,7 +597,7 @@ public class TypeMapper
         var returnParamsProperty = edmFunction.GetType().GetProperty("ReturnParameters");
         return returnParamsProperty == null
             ? edmFunction.ReturnParameter
-            : ((IEnumerable<FunctionParameter>)returnParamsProperty.GetValue(edmFunction, null)).FirstOrDefault();
+            : ((IEnumerable<FunctionParameter>)returnParamsProperty.GetValue(edmFunction, null)).SingleOrDefault();
     }
 
     public bool IsComposable(EdmFunction edmFunction)

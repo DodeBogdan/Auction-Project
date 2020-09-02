@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ProductRepository.cs" company="Transilvania University of Brasov">
-//     Copyright (c) Brassoi Silvia Maria. All rights reserved.
+//     Copyright (c) Bogdan Gheorghe Nicolae. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -9,7 +9,7 @@ namespace AuctionLogic.Repositories
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Bussines;
+    using Business;
     using log4net;
     using Models;
 
