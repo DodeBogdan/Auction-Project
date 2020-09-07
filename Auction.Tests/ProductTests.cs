@@ -620,7 +620,7 @@ namespace Auction.Tests
                 Active = true
             });
 
-            providerMenu.LogOut();
+            userRepository.LogOut();
 
             startupApplication.LogIn("Cata.Brassoi@yahoo.com", "Silvia", 1);
 
@@ -647,7 +647,7 @@ namespace Auction.Tests
 
             Assert.IsTrue(times == products.Count());
 
-            bidderMenu.LogOut();
+            userRepository.LogOut();
 
             startupApplication.LogIn("Silvia.Brassoi@yahoo.com", "Silvia", 1);
 

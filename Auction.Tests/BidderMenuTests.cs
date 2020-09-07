@@ -207,17 +207,7 @@ namespace Auction.Tests
                 Coin = "RON"
             });
 
-            providerMenu.LogOut();
-        }
-
-        /// <summary>Adds the product invalid user logged in excepted exception.</summary>
-        [TestMethod]
-        [ExpectedException(typeof(InvalidRoleStatusException))]
-        public void AddProduct_InvalidUserLoggedIn_ExceptedException()
-        {
-            startupApplication.LogIn("Cata.Brassoi@yahoo.com", "Silvia", 2);
-
-            bidderMenu.VerifyRoleStatus();
+            userRepository.LogOut();
         }
 
         /// <summary>Gets the products does not belong to current user get right list return list.</summary>
@@ -315,7 +305,8 @@ namespace Auction.Tests
 
             bidderMenu.BidForProduct(2, 27, "RON");
 
-            bidderMenu.LogOut();
+            userRepository.LogOut();
+
             startupApplication.LogIn("Silvia.Brassoi@yahoo.com", "Silvia", 1);
 
             bidderMenu.BidForProduct(2, 26, "RON");
@@ -330,7 +321,8 @@ namespace Auction.Tests
 
             bidderMenu.BidForProduct(2, 27, "RON");
 
-            bidderMenu.LogOut();
+            userRepository.LogOut();
+
             startupApplication.LogIn("Silvia.Brassoi@yahoo.com", "Silvia", 1);
 
             bidderMenu.BidForProduct(2, 40, "RON");
@@ -344,7 +336,8 @@ namespace Auction.Tests
 
             bidderMenu.BidForProduct(2, 27, "RON");
 
-            bidderMenu.LogOut();
+            userRepository.LogOut();
+
             startupApplication.LogIn("Dode.Brassoi@yahoo.com", "Silvia", 1);
 
             bidderMenu.BidForProduct(2, 29.4, "RON");

@@ -83,30 +83,6 @@ namespace Auction.Tests
                 });
         }
 
-        /// <summary>Adds the product invalid user logged in excepted exception.</summary>
-        [TestMethod]
-        [ExpectedException(typeof(InvalidRoleStatusException))]
-        public void AddProduct_InvalidUserLoggedIn_ExceptedException()
-        {
-            auctionMock.Users.Add(
-                new User
-                {
-                    ID = 2,
-                    FirstName = "Silvia",
-                    LastName = "Brassoi",
-                    Email = "silvia.Brassoi@yahoo.com",
-                    Password = "Silvia",
-                    Age = 23,
-                    CNP = "1123456789123",
-                    Adress = "Mandra nr. 61",
-                    Phone = "0762956316",
-                    RoleStatus = 1,
-                    Active = true
-                });
-
-            providerMenu.VerifyRoleStatus();
-        }
-
         /// <summary>Adds the product add valid product get one product.</summary>
         [TestMethod]
         public void AddProduct_AddValidProduct_GetOneProduct()
@@ -297,7 +273,7 @@ namespace Auction.Tests
                 Coin = "RON"
             });
 
-            providerMenu.LogOut();
+            userRepository.LogOut();
 
             startupApplication.Register(
                new User

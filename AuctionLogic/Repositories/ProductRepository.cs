@@ -57,8 +57,7 @@ namespace AuctionLogic.Repositories
             Log.Info("GetNoOfProductsActivesOfUser was called.");
 
             return auction.Products
-               .Where(x => x.IDUser == userId && x.Active)
-               .Count();
+                .Count(x => x.IDUser == userId && x.Active);
         }
 
         /// <summary>Gets the no of products actives of user by category.</summary>
@@ -70,8 +69,7 @@ namespace AuctionLogic.Repositories
             Log.Info("GetNoOfProductsActivesOfUserByCategory was called.");
 
             return auction.Products
-               .Where(x => x.IDUser == userId && x.Active && x.IDCategory == categoryId)
-               .Count();
+                .Count(x => x.IDUser == userId && x.Active && x.IDCategory == categoryId);
         }
 
         /// <summary>Gets the products that does not belong to a user.</summary>
@@ -79,7 +77,7 @@ namespace AuctionLogic.Repositories
         /// <returns>Return a list of products that can be displayed.</returns>
         public List<ShownProduct> GetProductsThatDoesNotBelongToAUser(int userId)
         {
-            Log.Info("GetProductsThatDoesntBelogToAUser was called.");
+            Log.Info("GetProductsThatDoesNotBelongToAUser was called.");
 
             return auction.Products
                  .Where(x => x.Active && x.IDUser != userId)
@@ -95,17 +93,16 @@ namespace AuctionLogic.Repositories
             Log.Info("GetProductById was called.");
 
             return auction.Products
-                .Where(x => x.ID == productId)
-                .SingleOrDefault();
+                .SingleOrDefault(x => x.ID == productId);
         }
 
         /// <summary>Gets the active bidding products.</summary>
-        /// <returns>Return number of active biddings.</returns>
+        /// <returns>Return number of active bids.</returns>
         public List<ShownProduct> GetActiveBiddingProducts()
         {
             Log.Info("GetActiveBiddingProducts was called.");
 
-            int currentUser = auction.Users
+            var currentUser = auction.Users
                 .Where(x => x.Active)
                 .Select(x => x.ID)
                 .SingleOrDefault();
@@ -122,7 +119,7 @@ namespace AuctionLogic.Repositories
         {
             Log.Info("GetWonBiddingProducts was called.");
 
-            int currentUser = auction.Users
+            var currentUser = auction.Users
                 .Where(x => x.Active)
                 .Select(x => x.ID)
                 .SingleOrDefault();
@@ -138,9 +135,8 @@ namespace AuctionLogic.Repositories
         {
             Log.Info("SaveChanges was called.");
 
-            Product currentProduct = auction.Products
-                .Where(x => x.ID == product.ID)
-                .SingleOrDefault();
+            var currentProduct = auction.Products
+                .SingleOrDefault(x => x.ID == product.ID);
 
             currentProduct = product;
 

@@ -7,7 +7,7 @@ namespace AuctionLogic.Business
 {
     using System.Linq;
     using System.Reflection;
-    using AuctionLogic.Exceptions;
+    using Exceptions;
     using log4net;
     using Models;
 

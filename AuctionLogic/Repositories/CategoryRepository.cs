@@ -8,8 +8,8 @@ namespace AuctionLogic.Repositories
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using AuctionLogic.Exceptions;
     using Business;
+    using Exceptions;
     using log4net;
     using Models;
 

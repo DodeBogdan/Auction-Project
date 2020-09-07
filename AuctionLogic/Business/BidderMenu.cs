@@ -36,26 +36,11 @@ namespace AuctionLogic.Business
             this.productRepository = productRepository;
         }
 
-        /// <summary>Verifies the role status.</summary>
-        /// <exception cref="InvalidRoleStatusException">Only bidders can see the items!</exception>
-        public void VerifyRoleStatus()
-        {
-            var user = userRepository.GetActiveUser();
-
-            if (user.RoleStatus == 2)
-            {
-                Log.Error("Only bidders can see the items!");
-                throw new InvalidRoleStatusException("Only bidders can see the items!");
-            }
-        }
-
         /// <summary>Gets the products does not belong to current user.</summary>
         /// <returns>Return a list of product that can be displayed.</returns>
         public List<ShownProduct> GetProductsDoesNotBelongToCurrentUser()
         {
             Log.Info("GetProductsDoesNotBelongToCurrentUser() was called.");
-
-            VerifyRoleStatus();
 
             return productRepository.GetProductsThatDoesNotBelongToAUser(userRepository.GetActiveUser().ID);
         }
@@ -69,7 +54,7 @@ namespace AuctionLogic.Business
             Log.Info($"GetProductById({productId}) was called.");
 
             var product = productRepository.GetProductById(productId);
-
+             
             List<int> list = productRepository.GetProductsThatDoesNotBelongToAUser(userRepository.GetActiveUser().ID)
                 .Select(x => x.Id).ToList();
 
@@ -244,14 +229,6 @@ namespace AuctionLogic.Business
             product.AuctedUser = userRepository.GetActiveUser().ID;
 
             productRepository.SaveChanges(product);
-        }
-
-        /// <summary>Logs the out.</summary>
-        public void LogOut()
-        {
-            Log.Info("LogOut() was called.");
-
-            userRepository.LogOut();
         }
     }
 }

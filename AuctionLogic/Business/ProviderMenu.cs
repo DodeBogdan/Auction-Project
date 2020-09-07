@@ -55,20 +55,6 @@ namespace AuctionLogic.Business
             return productRepository.GetNoOfProductsActivesOfUserByCategory(userId, categoryId);
         }
 
-        /// <summary>Verifies the role status.</summary>
-        /// <exception cref="InvalidRoleStatusException">Only those who bid can put items up for auction!</exception>
-        public void VerifyRoleStatus()
-        {
-            Log.Info("VerifyRoleStatus() was called");
-
-            var user = userRepository.GetActiveUser();
-
-            if (user.RoleStatus == 1)
-            {
-                throw new InvalidRoleStatusException("Only those who bid can put items up for auction!");
-            }
-        }
-
         /// <summary>Adds the product.</summary>
         /// <param name="product">The product.</param>
         /// <exception cref="BannedTimeException">You cannot place products while your account is pending.</exception>
@@ -77,8 +63,6 @@ namespace AuctionLogic.Business
         public void AddProduct(Product product)
         {
             Log.Info($"AddProduct({product.Name}) was called.");
-
-            VerifyRoleStatus();
 
             var user = userRepository.GetActiveUser();
 
@@ -118,8 +102,6 @@ namespace AuctionLogic.Business
         {
             Log.Info("SetProductInactive() was called");
 
-            VerifyRoleStatus();
-
             if (product == null)
             {
                 Log.Error("There is no product with that id.");
@@ -135,14 +117,6 @@ namespace AuctionLogic.Business
             product.Active = false;
 
             productRepository.SaveChanges(product);
-        }
-
-        /// <summary>Logs the out.</summary>
-        public void LogOut()
-        {
-            Log.Info("LogOut() was called");
-
-            userRepository.LogOut();
         }
     }
 }
